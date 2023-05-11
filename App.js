@@ -5,7 +5,7 @@ import {
   ImageBackground,
   TextInput,
   Text,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
@@ -28,7 +28,9 @@ export default function App() {
               secureTextEntry={true}
             />
           </View>
-          <Button title='SING IN'/>
+          <TouchableOpacity activeOpacity={0.5} style={styles.btn}>
+            <Text style={styles.btnTitle}>SING IN</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
@@ -62,4 +64,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 18,
   },
+
+  btn: {
+    backgroundColor: "#1e90ff",
+    height: 40,
+    borderRadius: 6,
+    marginTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 80,
+  },
+  btnTitle: {
+    color: "#fff",
+    fontSize: 18,
+  }
 });
