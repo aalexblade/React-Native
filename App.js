@@ -6,9 +6,12 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 
 export default function App() {
+  console.log(Platform.OS);
+  
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -66,16 +69,18 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    backgroundColor: "#1e90ff",
+    backgroundColor: Platform.OS === "ios" ? "transporter" : "#1e90ff",
     height: 40,
     borderRadius: 6,
     marginTop: 40,
+    borderWidth: 1,
+    borderColor: Platform.OS === "ios" ? "#f0f8ff" : "transporter",
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 80,
   },
   btnTitle: {
-    color: "#fff",
+    color: Platform.OS === "ios" ? "#4169e1" : "#fff",
     fontSize: 18,
   }
 });
