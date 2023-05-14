@@ -12,25 +12,22 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-import * as Font from "expo-font";
-import { AppLoading } from "expo";
+import { useFonts } from 'expo-font';
+// import { AppLoading } from "expo";
 
 const initialState = {
   email: "",
   password: "",
 };
 
-const loadApplication = async () => {
-  await Font.loadAsync({
-    "DMMono-Regular": require("./assets/fonts/DMMono-Regular.ttf"),
-  });
-};
-
 export default function App() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
-  const [iasReady, setIasReady] = useState(false);
+
+  const [fontsLoaded] = useFonts(({
+    'Dosis-ExtraBold': require('./assets/fonts/Dosis-ExtraBold.ttf')
+  }))
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -39,14 +36,8 @@ export default function App() {
     setstate(initialState);
   };
 
-  if (!iasReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIasReady(true)}
-        onError={console.warn}
-      />
-    );
+  if (!fontsLoaded) {
+    return null;
   }
 
   return (
@@ -117,8 +108,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "flex-end",
-    // justifyContent: "center",
+    // justifyContent: "flex-end",
+    justifyContent: "center",
     // alignItems: "center",
   },
   input: {
@@ -136,7 +127,7 @@ const styles = StyleSheet.create({
     color: "#f0f8ff",
     marginBottom: 10,
     fontSize: 18,
-    fontFamily: "DMMono-Regular",
+    fontFamily:"Dosis-Regular",
   },
   btn: {
     borderRadius: 6,
@@ -160,7 +151,6 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: Platform.OS === "ios" ? "#4169e1" : "#f0f8ff",
     fontSize: 18,
-    fontFamily: "DMMono-Regular",
   },
   header: {
     alignItems: "center",
@@ -169,6 +159,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 30,
     color: "#f0f8ff",
-    fontFamily: "DMMono-Regular",
+    fontFamily: "Dosis-ExtraBold",
   },
 });
