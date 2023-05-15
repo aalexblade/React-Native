@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 
 import { useFonts } from 'expo-font';
@@ -25,8 +26,19 @@ export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
 
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get('window').width
+      console.log("width, width")
+    };
+    Dimensions.addEventListener('change', onchange);
+    return () => {
+      Dimensions.removeEventListener('change', onChange);
+    };
+   }, []);
+
   const [fontsLoaded] = useFonts(({
-    'Dosis-ExtraBold': require('./assets/fonts/Dosis-ExtraBold.ttf')
+    'DMMono-Regular': require('./assets/fonts/DMMono-Regular.ttf')
   }))
 
   const keyboardHide = () => {
@@ -154,11 +166,11 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: "center",
-    marginBottom: 150,
+    marginBottom: 120,
   },
   headerTitle: {
     fontSize: 30,
     color: "#f0f8ff",
-    fontFamily: "Dosis-ExtraBold",
+    fontFamily: "DMMono-Regular",
   },
 });
